@@ -18,7 +18,6 @@ class SMSReceiver : BroadcastReceiver() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onReceive(context: Context, intent: Intent) {
-        Toast.makeText(context, "Receive SMS", Toast.LENGTH_SHORT).show()
         Log.d(TAG, "[TEST]")
         val extra = intent.extras ?: return
         var pdus = extra.get(PDU_TYPE) as Array<ByteArray>
@@ -29,7 +28,7 @@ class SMSReceiver : BroadcastReceiver() {
         msgs.forEach { m ->
             val body = m.messageBody.toString()
             val addr = m.originatingAddress
-            Log.d(TAG, "onReceive: [$addr] [$body]")
+            Toast.makeText(context, "Receive SMS [$addr]:[$body]", Toast.LENGTH_SHORT).show()
         }
     }
 }
